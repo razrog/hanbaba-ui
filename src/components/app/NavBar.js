@@ -23,21 +23,18 @@ export default class NavBar extends Component {
     render() {
         return (
 
-            <Navbar className="pd-navbar">
+            <Navbar className="hanbaba-navbar">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a onClick={(event) => {this.onClick('/ui', event)}} href="/ui">Product-Development</a>
+                        <a onClick={(event) => {this.onClick('/ui', event)}} href="/ui">בית מדרש</a>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>
                     <NavItem eventKey={1} onClick={(event) => {this.onClick('/ui', event)}} href="/ui">
                         Home
                     </NavItem>
-                    <NavItem eventKey={2} onClick={(event) => {this.onClick('/ui/kpis', event)}} href="/ui/kpis">
+                    <NavItem eventKey={2} onClick={(event) => {this.onClick('/ui/lessons', event)}} href="/ui/lessons">
                         KPIs
-                    </NavItem>
-                    <NavItem eventKey={2} onClick={(event) => {this.onClick('/ui/releasereadiness', event)}} href="/ui/releasereadiness">
-                        Version Readiness
                     </NavItem>
                 </Nav>
             </Navbar>

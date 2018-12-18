@@ -3,14 +3,11 @@ import React from 'react';
 import {Router, Route, Switch, Redirect} from 'react-router-dom';
 import history from './history.js';
 import Home from "./Home";
-import KpisHome from "./Kpis/Portal/KpisHome";
-import KpiManagment from "./Kpis/Management/KpiManagment";
-import {RedinessHome} from "./VersionReadiness/RedinessHome";
 
 export class RootRouter extends React.Component {
 
     constructor(props) {
-        super( props );
+        super(props);
     }
 
     getCurrLocation() {
@@ -20,7 +17,7 @@ export class RootRouter extends React.Component {
     render() {
 
         return (
-            <master-frame style={{display: 'block', height: '100%'}} id='pd-portal-server'>
+            <master-frame style={{display: 'block', height: '100%'}} id='hanbaba-portal'>
                 <Router history={history}>
                     <div style={{height: '100%'}}>
 
@@ -29,14 +26,11 @@ export class RootRouter extends React.Component {
                             <Route exact path={'/:base*/ui/'}
                                    render={(props) => (<Home/>)}/>
 
-                            <Route exact path={'/:base*/ui/kpis'}
-                                   render={(props) => (<KpisHome/>)}/>
+                            <Route exact path={'/:base*/ui/halacha'}
+                                   render={(props) => (<h1>halacha</h1>)}/>
 
-                            <Route exact path={'/:base*/ui/kpis/management'}
-                                   render={(props) => (<KpiManagment/>)}/>
-
-                            <Route exact path={'/:base*/ui/releasereadiness'}
-                                   render={(props) => (<RedinessHome/>)}/>
+                            <Route exact path={'/:base*/ui/parasha'}
+                                   render={(props) => (<h1>parasha</h1>)}/>
 
                             <Redirect from="/**" to={this.getCurrLocation()}/>
 
