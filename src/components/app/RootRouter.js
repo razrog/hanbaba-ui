@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import {Router, Route, Switch} from 'react-router-dom';
+import {Redirect, Router, Route, Switch} from 'react-router-dom';
 import history from './history.js';
 import Home from "./Home";
 import Lessons from "./Lessons/Lessons";
@@ -45,6 +45,11 @@ export class RootRouter extends React.Component {
 
                         <Switch>
 
+                            <Route exact path={'/:base*/'}
+                                   render={(props) => (
+                                       <Redirect to="/home"/>
+                                   )}/>
+
                             <Route exact path={'/:base*/home'}
                                    render={(props) => (<Home/>)}/>
 
@@ -82,6 +87,7 @@ export class RootRouter extends React.Component {
                                    render={(props) => (
                                        <Lessons key="vod" type={LESSON_TYPE.VOD.type}
                                                 header="שיעורים מצולמים"/>)}/>
+
 
                         </Switch>
                     </div>
