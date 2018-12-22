@@ -1,0 +1,21 @@
+body{
+    direction: rtl;
+}
+
+.main-navbar{
+    text-align: center;
+}
+.nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+.nav ul li {
+    display: inline-block;
+}
+.lessonCard{
+    text-align: center;
+}
+audio{
+    width: 100%;
+}
