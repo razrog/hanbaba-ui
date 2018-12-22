@@ -16,6 +16,10 @@ body{
 .lessonCard{
     text-align: center;
 }
+
+.cards{
+    padding: 10px;
+}
 audio{
     width: 100%;
 }

@@ -16,7 +16,8 @@ const LESSON_TYPE = {
     AVOT: new LessonType('AVOT'),
     PARASHA: new LessonType('PARASHA'),
     MOED: new LessonType('MOED'),
-    MUSAR: new LessonType('MUSAR')
+    MUSAR: new LessonType('MUSAR'),
+    VIDEO: new LessonType('VIDEO'),
 };
 
 export class RootRouter extends React.Component {
@@ -76,6 +77,11 @@ export class RootRouter extends React.Component {
                                    render={(props) => (
                                        <Lessons key="halacha" type={LESSON_TYPE.HALACHOT.type}
                                                 header="הלכות שבת קודש"/>)}/>
+
+                            <Route exact path={'/:base*/vod/'}
+                                   render={(props) => (
+                                       <Lessons key="vod" type={LESSON_TYPE.VOD.type}
+                                                header="שיעורים מצולמים"/>)}/>
 
                         </Switch>
                     </div>

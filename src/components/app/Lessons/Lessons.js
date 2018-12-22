@@ -27,7 +27,10 @@ export default class Lessons extends Component {
      * @return {Array.<T>}
      */
     getLessonsFromType(lessons, type) {
-        return lessons.filter(lesson => lesson.type === type);
+        lessons = lessons.filter(lesson => lesson.type === type);
+        return lessons.sort((a, b) => {
+            return new Date(b.dateAdded) - new Date(a.dateAdded);
+        });
     }
 
     componentDidMount() {
@@ -37,7 +40,7 @@ export default class Lessons extends Component {
                 return res.json();
             })
             .then(res => this.setState({
-                lessons: this.getLessonsFromType(res, this.state.type).reverse()
+                lessons: this.getLessonsFromType(res, this.state.type)
                 , isLoaded: true
             }));
     }
@@ -78,10 +81,11 @@ export default class Lessons extends Component {
                     <div>
                         <div className="container" style={{textAlign: 'center'}}>
                             <h1>{this.state.header}</h1>
-                            <h4>מציג 5 שיעורים אחרונים</h4>
+                            <h4>מציג 3 שיעורים אחרונים</h4>
                             <h5> סה״כ שיעורים זמינים ({this.state.lessons.length})</h5>
-                            <button onClick={this.handleLoadAll}>טען הכל</button><br/><br/>
-                            {lessonsList.slice(0, 1)}
+                            <button onClick={this.handleLoadAll}>טען הכל</button>
+                            <br/><br/>
+                            {lessonsList.slice(0, 3)}
                         </div>
                     </div>
                 )
