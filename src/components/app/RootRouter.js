@@ -45,50 +45,43 @@ export class RootRouter extends React.Component {
 
                         <Switch>
 
-                            <Route exact path={'/:base*/'}
-                                   render={(props) => (
-                                       <Redirect to="/home"/>
-                                   )}/>
-
-                            <Route exact path={'/:base*/home'}
+                            <Route exact path="/"
                                    render={(props) => (<Home/>)}/>
 
-                            <Route exact path={'/:base*/parasha/'}
+                            <Route path={'/:base*/parasha/'}
                                    render={(props) => (
                                        <Lessons key="parash" type={LESSON_TYPE.PARASHA.type}
                                                 header="פרשת השבוע"/>)}/>
 
-                            <Route exact path={'/:base*/gmara/'}
+                            <Route path={'/:base*/gmara/'}
                                    render={(props) => (
                                        <Lessons key="gmara" type={LESSON_TYPE.GMARA.type}
                                                 header="גמרא"/>)}/>
 
-                            <Route exact path={'/:base*/musar/'}
+                            <Route path={'/:base*/musar/'}
                                    render={(props) => (
                                        <Lessons key="musar" type={LESSON_TYPE.MUSAR.type}
                                                 header="מוסר - חובת הלבבות"/>)}/>
 
-                            <Route exact path={'/:base*/avot/'}
+                            <Route path={'/:base*/avot/'}
                                    render={(props) => (
                                        <Lessons key="avot" type={LESSON_TYPE.AVOT.type}
                                                 header="פרקי אבות"/>)}/>
 
-                            <Route exact path={'/:base*/moed/'}
+                            <Route path={'/:base*/moed/'}
                                    render={(props) => (
                                        <Lessons key="moed" type={LESSON_TYPE.MOED.type}
                                                 header="מועדים"/>)}/>
 
-                            <Route exact path={'/:base*/halacha/'}
+                            <Route path={'/:base*/halacha/'}
                                    render={(props) => (
                                        <Lessons key="halacha" type={LESSON_TYPE.HALACHOT.type}
                                                 header="הלכות שבת קודש"/>)}/>
 
-                            <Route exact path={'/:base*/vod/'}
+                            <Route path={'/:base*/vod/'}
                                    render={(props) => (
                                        <Lessons key="vod" type={LESSON_TYPE.VOD.type}
                                                 header="שיעורים מצולמים"/>)}/>
-
-
                         </Switch>
                     </div>
 

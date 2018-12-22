@@ -26,7 +26,7 @@ export default class NavBar extends Component {
                 <Navbar className="main-navbar navbar navbar-inverse">
                     <Navbar.Header>
                         <Navbar.Brand className="active">
-                            <a onClick={(event) => {this.onClick('/home', event)}} href="/home">ראשי</a>
+                            <a onClick={(event) => {this.onClick('/', event)}} href="/home">ראשי</a>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>
