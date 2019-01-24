@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import "isomorphic-fetch"
 import ApiReqService from "../../services/ApiReqService";
 import LessonCard from "./LessonCard";
+import AjaxExecutor from "../../services/AjaxExecutor";
 
 
 export default class Lessons extends Component {
@@ -35,15 +36,23 @@ export default class Lessons extends Component {
 
     componentDidMount() {
         console.log(`${ApiReqService.baseUrl()}/lessons/getAll`);
-        fetch(`${ApiReqService.baseUrl()}/lessons/getAll`)
-            .then((res) => {
-                return res.json();
-            })
-            .then(res => this.setState({
-                lessons: this.getLessonsFromType(res, this.state.type)
-                , isLoaded: true
-            }));
+        AjaxExecutor.callServerGet(`${ApiReqService.baseUrl()}/lessons/getAll`, undefined, this.handleSuccess, this.handleFailure);
     }
+
+    handleSuccess = (res) => {
+        // res = res.json();
+        this.setState({
+            lessons: this.getLessonsFromType(res, this.state.type)
+            , isLoaded: true
+        })
+    };
+
+    handleFailure = (err) => {
+        this.setState({
+            err: err
+            , isLoaded: true
+        })
+    };
 
     handleLoadAll = () => {
         this.setState({loadAll: true});
