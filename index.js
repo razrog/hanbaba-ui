@@ -58,6 +58,12 @@ const fetchFromDb = (req, res) => {
     let sql = 'SELECT * FROM lessons';
     db.query(sql, (err, results) => {
         if (err) throw err;
+        results.map(lesson => {
+            let lessonType = lesson.type;
+            let pathToFile = resolvePathToFile(lesson.pathToFile, lessonType);
+            lesson.pathToFile = pathToFile;
+            console.log(pathToFile)
+        });
         lessons = results;
         res.send(results);
     });
@@ -67,3 +73,41 @@ const fetchFromDb = (req, res) => {
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/build/index.html'));
 });
+
+const resolvePathToFile = (pathToFile, lessonType) => {
+    if (pathToFile.startsWith("/public")) {
+        return pathToFile.split("/public")[1];
+    } else if (pathToFile.startsWith("/music")) {
+        return pathToFile;
+    } else {
+        return getPathFromLessonType(lessonType) + pathToFile;
+    }
+};
+
+const getPathFromLessonType = (lessonType) => {
+    switch (lessonType) {
+        case "gmara":
+        case "GMARA":
+            return "/music/MP3/Gmara/";
+
+        case "halachot":
+        case "HALACHOT":
+            return "/music/MP3/HalahotShabat/";
+
+        case "avot":
+        case "AVOT":
+            return "/music/MP3/PerkeyAvot/";
+
+        case "parasha":
+        case "PARASHA":
+            return "/music/MP3/Parashot/";
+
+        case "moed":
+        case "MOED":
+            return "/music/MP3/Moed/";
+
+        case "musar":
+        case "MUSAR":
+            return "/music/MP3/Musar/";
+    }
+};
