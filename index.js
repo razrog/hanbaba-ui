@@ -1,23 +1,14 @@
 const express = require('express');
 const path = require('path');
-const url = require('url');
-const proxy = require('express-http-proxy');
-const mysql = require('mysql')
+const mysql = require('mysql');
 
 const app = express();
 
-var lessons = [];
+let lessons = [];
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '/build')));
 app.use(express.static(path.join(__dirname, '/PUB')));
-
-
-// const apiProxy = proxy('localhost:5000/api', {
-//     proxyReqPathResolver: req => url.parse(req.baseUrl).path
-// });
-
-// app.use('/api/**', apiProxy);
 
 
 const port = process.env.PORT || 80;
@@ -54,6 +45,11 @@ app.get('/api/lessons/getAll', (req, res) => {
 });
 
 
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/build/index.html'));
+});
+
 const fetchFromDb = (req, res) => {
     console.log("Fetching lessons from DB");
     let sql = 'SELECT * FROM lessons';
@@ -61,19 +57,12 @@ const fetchFromDb = (req, res) => {
         if (err) throw err;
         results.map(lesson => {
             let lessonType = lesson.type;
-            let pathToFile = resolvePathToFile(lesson.pathToFile, lessonType);
-            lesson.pathToFile = pathToFile;
-            console.log(pathToFile)
+            lesson.pathToFile = resolvePathToFile(lesson.pathToFile, lessonType);
         });
         lessons = results;
         res.send(results);
     });
 };
-
-// Handles any requests that don't match the ones above
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/build/index.html'));
-});
 
 const resolvePathToFile = (pathToFile, lessonType) => {
     if (pathToFile.startsWith("/public")) {
