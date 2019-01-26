@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React from 'react';
-import {Redirect, Router, Route, Switch} from 'react-router-dom';
+import {Route, Router, Switch} from 'react-router-dom';
 import history from './history.js';
 import Home from "./Home";
 import Lessons from "./Lessons/Lessons";
+import ManagementConsole from "./Lessons/Management/ManagementConsole";
 
 
 function LessonType(type) {
@@ -47,6 +48,10 @@ export class RootRouter extends React.Component {
 
                             <Route exact path="/"
                                    render={(props) => (<Home/>)}/>
+
+                            <Route path={'/:base*/management-console/'}
+                                   render={(props) => (
+                                       <ManagementConsole/>)}/>
 
                             <Route path={'/:base*/parasha/'}
                                    render={(props) => (
