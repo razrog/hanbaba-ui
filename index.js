@@ -10,6 +10,7 @@ var lessons = [];
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static(path.join(__dirname, '/PUB')));
 
 
 // const apiProxy = proxy('localhost:5000/api', {
