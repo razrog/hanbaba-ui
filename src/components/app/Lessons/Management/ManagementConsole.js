@@ -2,7 +2,6 @@
 import React, {Component} from 'react';
 import ApiReqService from "../../../services/ApiReqService";
 import AjaxExecutor from "../../../services/AjaxExecutor";
-import LessonCard from "../LessonCard";
 
 export default class ManagementConsole extends Component {
 
@@ -51,31 +50,15 @@ export default class ManagementConsole extends Component {
     render() {
         const {lessons, isLoaded} = this.state;
 
-        const lessonsList = lessons.map((lesson) => {
-            return <LessonCard key={lesson.id}
-                               name={lesson.name}
-                               description={lesson.description}
-                               rabbi={lesson.rabbi}
-                               dateAdded={lesson.dateAdded}
-                               pathToFile={lesson.pathToFile}
-            />
-        });
-
-        if (!isLoaded) {
-            return <h4>שיעורים נטענים...</h4>
-        }
-        else {
-            return <div>
-                <div className="container" style={{textAlign: 'center'}}>
-                    <h1>{this.state.header}</h1>
-                    <h4>כל השיעורים</h4>
-                    <h5> סה״כ שיעורים זמינים ({this.state.lessons.length})</h5>
-                    {lessonsList}
-                </div>
-            </div>
-
-
-        }
+        return <form ref='uploadForm'
+                     id='uploadForm'
+                     action='/upload'
+                     method='post'
+                     encType="multipart/form-data">
+            <input type="file" name="lesson"/>
+            <input type="textarea" name="fileName"/>
+            <input type='submit' value='Upload!'/>
+        </form>
     }
 }
 

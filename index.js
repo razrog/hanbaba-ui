@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
@@ -9,9 +10,10 @@ let lessons = [];
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '/build')));
 app.use(express.static(path.join(__dirname, '/PUB')));
+app.use(fileUpload());
 
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8080;
 app.listen(port);
 
 console.log('App is listening on port ' + port);
@@ -23,6 +25,11 @@ const db = mysql.createConnection({
     user: 'razrog',
     password: '1qaz!QAZ',
     database: 'lessons'
+
+    // host: 'localhost',
+    // user: 'root',
+    // password: '',
+    // database: 'lessons'
 });
 
 // Connect
@@ -48,6 +55,24 @@ app.get('/api/lessons/getAll', (req, res) => {
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/build/index.html'));
+});
+
+app.post('/upload', function (req, res) {
+    if (Object.keys(req.files).length == 0) {
+        return res.status(400).send('No files were uploaded.');
+    }
+
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    let newLesson = req.files.lesson;
+    let fileName = req.fileName;
+    let lessonTypePwd = getPathFromLessonType(req.lessonType);
+    // newLesson.mv('/home/ec2-user/dev/services/hanbaba/hanbaba-ui/PUB/' + lessonTypePwd + '/' + fileName, function (err) {
+    newLesson.mv('./files/' + lessonTypePwd + fileName, function (err) {
+        if (err)
+            return res.status(500).send(err);
+
+        res.send('File uploaded!');
+    });
 });
 
 const fetchFromDb = (req, res) => {

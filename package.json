@@ -28,9 +28,7 @@
     "client": "npm run start",
     "dev": "concurrently --kill-others \"npm run serve\" \"npm run client\"",
     "start": "PORT=5000 react-scripts start",
-    "build": "reac  t-scripts build",
-    "express": "node index.js",
-    "run-prod": "forever start -c nodemon index.js",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

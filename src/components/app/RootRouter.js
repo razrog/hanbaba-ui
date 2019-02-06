@@ -49,7 +49,7 @@ export class RootRouter extends React.Component {
                             <Route exact path="/"
                                    render={(props) => (<Home/>)}/>
 
-                            <Route path={'/:base*/management-console/'}
+                            <Route path={'/:base*/management/'}
                                    render={(props) => (
                                        <ManagementConsole/>)}/>
 
