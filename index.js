@@ -19,9 +19,9 @@ console.log('App is listening on port ' + port);
 
 // Create connection
 const db = mysql.createConnection({
-    host: 'toradb.chjdbwlzo4nc.us-west-2.rds.amazonaws.com',
-    user: 'razrog',
-    password: '1qaz!QAZ',
+    host: 'localhost',
+    user: 'root',
+    password: '1q2w3e4r',
     database: 'lessons'
 });
 
